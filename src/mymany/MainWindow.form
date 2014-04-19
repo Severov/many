@@ -48,7 +48,7 @@
               <JTabbedPaneConstraints tabName="&#x421;&#x447;&#x435;&#x442;&#x430;">
                 <Property name="tabTitle" type="java.lang.String" value="&#x421;&#x447;&#x435;&#x442;&#x430;"/>
                 <Property name="tabIcon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/money.png"/>
+                  <Image iconType="3" name="/icon/money.png"/>
                 </Property>
               </JTabbedPaneConstraints>
             </Constraint>
@@ -73,7 +73,7 @@
               <JTabbedPaneConstraints tabName="&#x420;&#x430;&#x441;&#x445;&#x43e;&#x434;&#x44b;">
                 <Property name="tabTitle" type="java.lang.String" value="&#x420;&#x430;&#x441;&#x445;&#x43e;&#x434;&#x44b;"/>
                 <Property name="tabIcon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/cart_delete.png"/>
+                  <Image iconType="3" name="/icon/cart_delete.png"/>
                 </Property>
               </JTabbedPaneConstraints>
             </Constraint>
@@ -118,7 +118,7 @@
               <JTabbedPaneConstraints tabName="&#x414;&#x43e;&#x445;&#x43e;&#x434;&#x44b;">
                 <Property name="tabTitle" type="java.lang.String" value="&#x414;&#x43e;&#x445;&#x43e;&#x434;&#x44b;"/>
                 <Property name="tabIcon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/cart_add.png"/>
+                  <Image iconType="3" name="/icon/cart_add.png"/>
                 </Property>
               </JTabbedPaneConstraints>
             </Constraint>
@@ -143,7 +143,7 @@
               <JTabbedPaneConstraints tabName="&#x414;&#x43e;&#x43b;&#x433;&#x438; &#x438; &#x43a;&#x440;&#x435;&#x434;&#x438;&#x442;&#x44b;">
                 <Property name="tabTitle" type="java.lang.String" value="&#x414;&#x43e;&#x43b;&#x433;&#x438; &#x438; &#x43a;&#x440;&#x435;&#x434;&#x438;&#x442;&#x44b;"/>
                 <Property name="tabIcon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/basket.png"/>
+                  <Image iconType="3" name="/icon/basket.png"/>
                 </Property>
               </JTabbedPaneConstraints>
             </Constraint>

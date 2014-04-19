@@ -63,7 +63,7 @@ public class MainWindow extends javax.swing.JFrame {
             .addGap(0, 464, Short.MAX_VALUE)
         );
 
-        jTabbedPane1.addTab("Счета", new javax.swing.ImageIcon(getClass().getResource("/money.png")), jPanel4); // NOI18N
+        jTabbedPane1.addTab("Счета", new javax.swing.ImageIcon(getClass().getResource("/icon/money.png")), jPanel4); // NOI18N
 
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -125,7 +125,7 @@ public class MainWindow extends javax.swing.JFrame {
             .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 464, Short.MAX_VALUE)
         );
 
-        jTabbedPane1.addTab("Расходы", new javax.swing.ImageIcon(getClass().getResource("/cart_delete.png")), jPanel1); // NOI18N
+        jTabbedPane1.addTab("Расходы", new javax.swing.ImageIcon(getClass().getResource("/icon/cart_delete.png")), jPanel1); // NOI18N
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -138,7 +138,7 @@ public class MainWindow extends javax.swing.JFrame {
             .addGap(0, 464, Short.MAX_VALUE)
         );
 
-        jTabbedPane1.addTab("Доходы", new javax.swing.ImageIcon(getClass().getResource("/cart_add.png")), jPanel2); // NOI18N
+        jTabbedPane1.addTab("Доходы", new javax.swing.ImageIcon(getClass().getResource("/icon/cart_add.png")), jPanel2); // NOI18N
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -151,7 +151,7 @@ public class MainWindow extends javax.swing.JFrame {
             .addGap(0, 464, Short.MAX_VALUE)
         );
 
-        jTabbedPane1.addTab("Долги и кредиты", new javax.swing.ImageIcon(getClass().getResource("/basket.png")), jPanel3); // NOI18N
+        jTabbedPane1.addTab("Долги и кредиты", new javax.swing.ImageIcon(getClass().getResource("/icon/basket.png")), jPanel3); // NOI18N
 
         jButton2.setText("jButton2");
         jButton2.addMouseListener(new java.awt.event.MouseAdapter() {

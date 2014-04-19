@@ -110,23 +110,23 @@ public class Tranzaktion2 extends javax.swing.JDialog {
         });
         jScrollPane1.setViewportView(jTable1);
 
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cross.png"))); // NOI18N
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/cross.png"))); // NOI18N
         jButton1.setText("Отмена");
         jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                jButton1MousePressed(evt);
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton1MouseClicked(evt);
             }
         });
 
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/tick.png"))); // NOI18N
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/tick.png"))); // NOI18N
         jButton2.setText("Ок");
         jButton2.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                jButton2MousePressed(evt);
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton2MouseClicked(evt);
             }
         });
 
-        jButton3.setIcon(new javax.swing.ImageIcon("/home/mishka/Dropbox/Linux/work space (netBeans)/MyMany/icons/add.png")); // NOI18N
+        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/add.png"))); // NOI18N
         jButton3.setText("Добавить");
         jButton3.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -134,7 +134,7 @@ public class Tranzaktion2 extends javax.swing.JDialog {
             }
         });
 
-        jButton4.setIcon(new javax.swing.ImageIcon("/home/mishka/Dropbox/Linux/work space (netBeans)/MyMany/icons/delete.png")); // NOI18N
+        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/delete.png"))); // NOI18N
         jButton4.setText("Удалить");
         jButton4.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -217,7 +217,7 @@ public class Tranzaktion2 extends javax.swing.JDialog {
                 .addContainerGap())
         );
 
-        jTabbedPane1.addTab("Расход / Приход", new javax.swing.ImageIcon(getClass().getResource("/basket_edit.png")), jPanel1); // NOI18N
+        jTabbedPane1.addTab("Расход / Приход", new javax.swing.ImageIcon(getClass().getResource("/icon/basket_edit.png")), jPanel1); // NOI18N
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -230,7 +230,7 @@ public class Tranzaktion2 extends javax.swing.JDialog {
             .addGap(0, 345, Short.MAX_VALUE)
         );
 
-        jTabbedPane1.addTab("Перевод", new javax.swing.ImageIcon(getClass().getResource("/cart_add.png")), jPanel2); // NOI18N
+        jTabbedPane1.addTab("Перевод", new javax.swing.ImageIcon(getClass().getResource("/icon/cart_add.png")), jPanel2); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -245,14 +245,6 @@ public class Tranzaktion2 extends javax.swing.JDialog {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jButton2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MousePressed
-        System.out.println(UUID.randomUUID()); 
-        
-        for (int i = 0; i < jTable1.getRowCount(); i++){
-            String SQL = "INSERT into costs ('', '', '') VALUE ()";
-        }
-    }//GEN-LAST:event_jButton2MousePressed
 
     /**
      * Добавление строки в конец таблицы
@@ -283,14 +275,7 @@ public class Tranzaktion2 extends javax.swing.JDialog {
        }
     }//GEN-LAST:event_jButton4MousePressed
 
-    /**
-     * Нажата кнопка отмены ( закроем форму )
-     * @param evt 
-     */  
-    private void jButton1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MousePressed
-        this.dispose();
-    }//GEN-LAST:event_jButton1MousePressed
-
+      
     /**
      * Изменить списание на приход
      * @param evt 
@@ -302,6 +287,26 @@ public class Tranzaktion2 extends javax.swing.JDialog {
             jLabel1.setText("Списать со счета");
         }
     }//GEN-LAST:event_jCheckBox1MouseClicked
+
+    /**
+     * Нажата кнопка отмены ( закроем форму )
+     * @param evt 
+     */
+    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
+        this.dispose();
+    }//GEN-LAST:event_jButton1MouseClicked
+
+    /**
+     * Была нажата ОК - запишим данные в базу
+     * @param evt 
+     */
+    private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
+         System.out.println(UUID.randomUUID()); 
+        
+        for (int i = 0; i < jTable1.getRowCount(); i++){
+            String SQL = "INSERT into costs ('', '', '') VALUE ()";
+        }
+    }//GEN-LAST:event_jButton2MouseClicked
 
     public void Show() {
                 /* Create and display the dialog */
