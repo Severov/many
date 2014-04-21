@@ -11,7 +11,10 @@ import java.sql.Array;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.GregorianCalendar;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
 import java.util.Vector;
 import java.util.logging.Level;
@@ -35,24 +38,37 @@ import javax.swing.table.TableModel;
 public class Tranzaktion2 extends javax.swing.JDialog {
 
     private Tranzaktion2 dialog;
+    private String      uid; // происходит редактирование ранее введенных данных
     
-    private JComboBox comboCategories; // Хранит категории 
-    private JComboBox comboFamili;     // Хранит список членов семьи
-    private Vector helpDescription;
+    private ArrayList<String> comboCategories;  // Хранит категории 
+    private ArrayList<String> comboFamili;      // Хранит список членов семьи
+    private ArrayList<String> comboAccount;     // Хранит список доступных счетов
+    private Map helpDescription;             // для динамического поиска по описаниям
     
     /**
      * Creates new form Tranzaktion2
      */
+    
     public Tranzaktion2(java.awt.Frame parent, boolean modal) {
+        super(parent, modal);
+        initComponents();
+        uid = ""; // вводим новый данные
+        
+        // заполним все визуальные компоненты ...
+        InitData();
+        
+        //helpDescription = new Vector();
+        // TODO: доделать динамический поиск описания
+        // helpDescription.S
+    }
+    
+    public Tranzaktion2(java.awt.Frame parent, boolean modal, String uid) {
         super(parent, modal);
         initComponents();
         
         // заполним все визуальные компоненты ...
         InitData();
-        
-        helpDescription = new Vector();
-        // TODO: доделать динамический поиск описания
-        // helpDescription.S
+        this.uid = uid;
     }
     
      /**   
@@ -78,6 +94,7 @@ public class Tranzaktion2 extends javax.swing.JDialog {
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         jCheckBox1 = new javax.swing.JCheckBox();
+        jLabel3 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -101,13 +118,21 @@ public class Tranzaktion2 extends javax.swing.JDialog {
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.String.class
+                java.lang.Object.class, java.lang.String.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, true, true, true, true, true
             };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
             }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
         });
+        jTable1.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(jTable1);
 
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/cross.png"))); // NOI18N
@@ -166,34 +191,35 @@ public class Tranzaktion2 extends javax.swing.JDialog {
             }
         });
 
+        jLabel3.setText("Всего потрачено: ");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jLabel3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButton2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton1))
+                    .addComponent(jScrollPane1)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane1)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGap(402, 402, 402))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jCheckBox1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLabel1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                        .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(402, 402, 402))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jCheckBox1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -213,7 +239,8 @@ public class Tranzaktion2 extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton2)
-                    .addComponent(jButton1))
+                    .addComponent(jButton1)
+                    .addComponent(jLabel3))
                 .addContainerGap())
         );
 
@@ -274,8 +301,7 @@ public class Tranzaktion2 extends javax.swing.JDialog {
            model.setValueAt(i + 1, i, 0);
        }
     }//GEN-LAST:event_jButton4MousePressed
-
-      
+    
     /**
      * Изменить списание на приход
      * @param evt 
@@ -301,11 +327,7 @@ public class Tranzaktion2 extends javax.swing.JDialog {
      * @param evt 
      */
     private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
-         System.out.println(UUID.randomUUID()); 
-        
-        for (int i = 0; i < jTable1.getRowCount(); i++){
-            String SQL = "INSERT into costs ('', '', '') VALUE ()";
-        }
+         AddToDataBase();
     }//GEN-LAST:event_jButton2MouseClicked
 
     public void Show() {
@@ -333,44 +355,80 @@ public class Tranzaktion2 extends javax.swing.JDialog {
         //выберим доступные счета ...
         String SQL = "SELECT * FROM account left outer join valuta on IDValuta = valuta.ID";
         ResultSet result = new CWorkInDataBaseSQLite().execute(SQL);
-        // очистим
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] {}));
+
+        comboAccount = new ArrayList<>();
         try {
             while (result.next()){
-                jComboBox1.addItem(result.getString("descriptions") + " (" + result.getString("reduction") + " )");
+                comboAccount.add(result.getString("descriptions"));
             }
         } catch (SQLException ex) {
             Logger.getLogger(Tranzaktion2.class.getName()).log(Level.SEVERE, null, ex);
         }
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(comboAccount.toArray()));
         
-         // настроим типы данных для колонок ...
-       comboCategories = new JComboBox();
+       // настроим типы данных для колонок ...
+       comboCategories = new ArrayList<>();
        // вытащим все доступные категории ... 
        SQL = "SELECT * FROM categories";
        result = new CWorkInDataBaseSQLite().execute(SQL);
        try {          
            while (result.next()){
-               comboCategories.addItem(result.getString("description"));
+               comboCategories.add(result.getString("description"));
        }
         } catch (SQLException ex){
              Logger.getLogger(Tranzaktion2.class.getName()).log(Level.SEVERE, null, ex);
-    }                                     
-       jTable1.getColumnModel().getColumn(3).setCellEditor(new DefaultCellEditor(comboCategories));
+    }                  
+       JComboBox cat = new JComboBox();
+       cat.setModel(new javax.swing.DefaultComboBoxModel(comboCategories.toArray()));
+       jTable1.getColumnModel().getColumn(3).setCellEditor(new DefaultCellEditor(cat));
        
        // Подставим членов семьи
        SQL = "SELECT * FROM Famili";
-       comboFamili = new JComboBox();
+       comboFamili = new ArrayList<>();
        result = new CWorkInDataBaseSQLite().execute(SQL);
        try {
            while (result.next()){
-               comboFamili.addItem(result.getString("descriptions"));
-       }
+               comboFamili.add(result.getString("descriptions"));
+            }
         } catch (SQLException ex){
              Logger.getLogger(Tranzaktion2.class.getName()).log(Level.SEVERE, null, ex);
-    }           
-       jTable1.getColumnModel().getColumn(4).setCellEditor(new DefaultCellEditor(comboFamili)); 
-       // Авто подбор описания затрат/доходов на основании уже введенной иформации
+            }        
+       JComboBox fam = new JComboBox();
+       fam.setModel(new javax.swing.DefaultComboBoxModel(comboFamili.toArray()));
+       jTable1.getColumnModel().getColumn(4).setCellEditor(new DefaultCellEditor(fam)); 
        
+       // Авто подбор описания затрат/доходов на основании уже введенной иформации
+//       SQL = "SELECT descriptions FROM costs";
+//       result = new CWorkInDataBaseSQLite().execute(SQL);
+//       try {
+//           while (result.next()){
+//               Map.Entry(result.getString("descriptions"),);
+//            }
+//        } catch (SQLException ex){
+//             Logger.getLogger(Tranzaktion2.class.getName()).log(Level.SEVERE, null, ex);
+//            }  
+    }
+    
+    private void AddToDataBase(){
+        String SQL = ""; // Хранит запрос INSERT к БД
+        String uuid = UUID.randomUUID().toString();
+        
+        String buf = "INSERT into costs('IDAccount', 'data', 'Summa', 'IDCategories', 'IDFamili', 'descriptions', 'comment', 'IDTranzaction') VALUES ";
+        if (jCheckBox1.isSelected()) { // Если делаем приход тогда ...
+            SQL.replaceAll("costs", "");
+        }
+        
+        for(int i = 0; i <= jTable1.getRowCount() - 1; i++){
+            SQL =  buf + "((SELECT MIN(ID) FROM account WHERE descriptions = '" + (String)jComboBox1.getSelectedItem() +"'), " 
+                        + "'" + jTextField1.getText() + "', "
+                        + "'" + jTable1.getValueAt(i, 2).toString().replace(",", ".")+ "', "  // СУмма
+                        + "(SELECT MIN(ID) FROM categories WHERE description = '" + jTable1.getValueAt(i, 3)+ "'), "// Категория
+                        + "(SELECT MIN(ID) FROM Famili WHERE descriptions = '" + jTable1.getValueAt(i, 4)+ "'), "    // Член семьи
+                        + "'" + jTable1.getValueAt(i, 1).toString() + "', "  // Описание
+                        + "'" + jTable1.getValueAt(i, 5).toString() + "', "  // Комментарий
+                        + "'" + uuid +"');";
+            new CWorkInDataBaseSQLite().Insert(SQL);
+        }             
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -382,6 +440,7 @@ public class Tranzaktion2 extends javax.swing.JDialog {
     private javax.swing.JComboBox jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;

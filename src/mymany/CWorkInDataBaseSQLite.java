@@ -69,6 +69,15 @@ public class  CWorkInDataBaseSQLite implements IWorkInDataBase{
         }
     }
     
+    public boolean Insert(String SQL){
+        try {
+            return statement.execute(SQL);
+        } catch (SQLException ex) {
+            Logger.getLogger(CWorkInDataBaseSQLite.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
+        }
+    }
+    
     @Override
      public boolean createNewDataBase() {
         return false;
